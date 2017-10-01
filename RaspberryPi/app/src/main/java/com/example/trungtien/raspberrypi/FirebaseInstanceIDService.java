@@ -27,7 +27,6 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
     public void onCreate() {
         super.onCreate();
         onTokenRefresh();
-
     }
 
     @Override
@@ -45,7 +44,7 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
                 .add("Token", token)
                 .build();
         final Request request = new Request.Builder()
-                .url("http://192.168.1.13/~trungtien/register.php")
+                .url(Manager.URL_TEST)
                 .post(body)
                 .build();
 
@@ -60,13 +59,12 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
                 if (!response.isSuccessful()) {
                     throw new IOException("Unexpected code " + response);
                 } else {
+                    // do something wih the result
                     client.newCall(request).execute();
                     Log.e(TAG, "Refreshed token: " + token);
-                    // do something wih the result
+
                 }
             }
-
-
         });
     }
 }
