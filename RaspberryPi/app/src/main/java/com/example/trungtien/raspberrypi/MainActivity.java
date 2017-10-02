@@ -1,90 +1,26 @@
 package com.example.trungtien.raspberrypi;
 
-import android.app.FragmentManager;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessaging;
+import com.example.trungtien.raspberrypi.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirebaseMessaging.getInstance().subscribeToTopic("test");
-        String mgs =FirebaseInstanceId.getInstance().getToken();
-        Toast.makeText(this,mgs,Toast.LENGTH_SHORT).show();
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.content_frame
-                        , new FirstFragment())
-                .commit();
-        initNavigationDrawer();
-
+        redirect(LoginActivity.class);
 
     }
-
-    public void initNavigationDrawer() {
-
-        NavigationView navigationView = (NavigationView)findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-
-                int id = menuItem.getItemId();
-
-                switch (id){
-                    case R.id.home:
-                        Toast.makeText(getApplicationContext(),"Home",Toast.LENGTH_SHORT).show();
-                        drawerLayout.closeDrawers();
-                        break;
-                    case R.id.settings:
-                        Toast.makeText(getApplicationContext(),"Settings",Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.trash:
-                        Toast.makeText(getApplicationContext(),"Trash",Toast.LENGTH_SHORT).show();
-                        drawerLayout.closeDrawers();
-                        break;
-                    case R.id.logout:
-                        finish();
-
-                }
-                return true;
-            }
-        });
-        View header = navigationView.getHeaderView(0);
-        TextView tv_email = (TextView)header.findViewById(R.id.tv_email);
-        tv_email.setText("raj.amalw@learn2crack.com");
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer);
-
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close){
-
-            @Override
-            public void onDrawerClosed(View v){
-                super.onDrawerClosed(v);
-            }
-
-            @Override
-            public void onDrawerOpened(View v) {
-                super.onDrawerOpened(v);
-            }
-        };
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
+    private void redirect(Class<? extends Activity> clazz) {
+        Intent intent = new Intent(this, clazz);
+        startActivity(intent);
+        finish();
     }
+
 
 }
 

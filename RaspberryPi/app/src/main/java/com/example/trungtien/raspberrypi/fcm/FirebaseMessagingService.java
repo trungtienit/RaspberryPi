@@ -1,10 +1,12 @@
-package com.example.trungtien.raspberrypi;
+package com.example.trungtien.raspberrypi.fcm;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
+import com.example.trungtien.raspberrypi.MainActivity;
+import com.example.trungtien.raspberrypi.R;
 import com.google.firebase.messaging.RemoteMessage;
 
 /**

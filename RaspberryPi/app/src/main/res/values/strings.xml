@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">RaspberryPi</string>
+    <string name="app_name">Raspberry Pi</string>
     <string name="action_settings">Setting</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <string name="error_incorrect">Your password was incorrect</string>
+    <string name="same_pass">You must enter the same password twice in order to confirm it.</string>
 </resources>

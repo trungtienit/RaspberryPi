@@ -1,4 +1,4 @@
-package com.example.trungtien.raspberrypi;
+package com.example.trungtien.raspberrypi.homescreen.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -7,21 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
+import com.example.trungtien.raspberrypi.R;
+
 /**
  * Created by user on 12/31/15.
  */
-public class FirstFragment extends Fragment {
+public class IntroduceFragment extends Fragment {
 
     View myView;
     WebView webview;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.first_layout, container, false);
-        webview = myView.findViewById(R.id.webview);
-        webview.getSettings().setJavaScriptEnabled(true);
-        webview.loadUrl(Manager.POSTURL);
-        webview.setHorizontalScrollBarEnabled(false);
+        myView = inflater.inflate(R.layout.view_introduce_layout, container, false);
+
         return myView;
 
     }

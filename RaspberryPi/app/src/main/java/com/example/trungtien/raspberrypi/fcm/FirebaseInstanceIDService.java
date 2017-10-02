@@ -1,8 +1,9 @@
 
-package com.example.trungtien.raspberrypi;
+package com.example.trungtien.raspberrypi.fcm;
 
 import android.util.Log;
 
+import com.example.trungtien.raspberrypi.homescreen.Manager;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
