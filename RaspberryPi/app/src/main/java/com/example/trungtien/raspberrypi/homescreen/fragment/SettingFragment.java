@@ -30,11 +30,13 @@ public class SettingFragment extends Fragment {
     }
 
     private void setupView() {
+
         oldPassword = myView.findViewById(R.id.oldPassword);
         newPassword = myView.findViewById(R.id.newPassword);
         conformPassword = myView.findViewById(R.id.conformPassword);
         btnChange = myView.findViewById(R.id.btnChange);
         tvError = myView.findViewById(R.id.tvError);
+
 
         btnChange.setOnClickListener(new View.OnClickListener() {
             @Override

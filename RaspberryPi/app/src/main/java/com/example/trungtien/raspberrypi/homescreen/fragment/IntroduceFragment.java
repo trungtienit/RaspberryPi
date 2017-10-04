@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 
 import com.example.trungtien.raspberrypi.R;
 
@@ -15,7 +14,6 @@ import com.example.trungtien.raspberrypi.R;
 public class IntroduceFragment extends Fragment {
 
     View myView;
-    WebView webview;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

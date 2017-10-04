@@ -40,7 +40,6 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (pass.equals(StoreManager.getPass(SplashScreenActivity.this))) {
-
                     finishProgress();
                 } else {
                     progressBar.setProgress(0);
@@ -50,6 +49,8 @@ public class SplashScreenActivity extends AppCompatActivity {
                         public void onClick(View view) {
                             Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
                             startActivity(intent);
+                            finish();
+
                         }
                     });
                     return;

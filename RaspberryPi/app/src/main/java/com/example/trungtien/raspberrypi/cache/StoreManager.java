@@ -12,8 +12,6 @@ import com.example.trungtien.raspberrypi.homescreen.Manager;
 
 public class StoreManager {
     public static SharedPreferences sharedPref;
-
-
     public static void savePass(Activity activity, String data) {
         if (sharedPref == null)
             sharedPref = activity.getPreferences(Context.MODE_PRIVATE);

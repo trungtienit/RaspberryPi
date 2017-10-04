@@ -44,8 +44,9 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
         RequestBody body = new FormBody.Builder()
                 .add("Token", token)
                 .build();
+
         final Request request = new Request.Builder()
-                .url(Manager.URL_TEST)
+                .url(Manager.getURL())
                 .post(body)
                 .build();
 
