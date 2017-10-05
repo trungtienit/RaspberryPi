@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "701147363532",
+    "firebase_url": "https://raspberrypi-82bb3.firebaseio.com",
+    "project_id": "raspberrypi-82bb3",
+    "storage_bucket": "raspberrypi-82bb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701147363532:android:4a8e19003b2606fe",
+        "android_client_info": {
+          "package_name": "com.example.trungtien.raspberrypi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "701147363532-2m6393pp2dnojkm53fvm8p8ambd1ug66.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7CWO6g9UbaolVkZPIAzPWbwv61UUeZhU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
