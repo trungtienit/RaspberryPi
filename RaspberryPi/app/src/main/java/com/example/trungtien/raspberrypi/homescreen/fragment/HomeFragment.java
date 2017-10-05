@@ -10,9 +10,6 @@ import android.webkit.WebView;
 import com.example.trungtien.raspberrypi.homescreen.Manager;
 import com.example.trungtien.raspberrypi.R;
 
-/**
- * Created by user on 12/31/15.
- */
 public class HomeFragment extends Fragment {
 
     View myView;
