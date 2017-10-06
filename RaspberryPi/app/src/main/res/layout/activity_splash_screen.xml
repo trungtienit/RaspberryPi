@@ -4,50 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/bg_screen"
     tools:context="com.example.trungtien.raspberrypi.splash.SplashScreenActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="@style/setting_load_progress_bar_style"
         android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="30dp" />
+        android:layout_height="2dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="center" />
 
-    <com.example.trungtien.raspberrypi.splash.raspberry_text.TextField
-        android:id="@+id/tf"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="70dp"
-        android:clickable="false"
-        app:mtf_cardCollapsedHeight="4dp"
-        app:mtf_hasFocus="false"
-        app:mtf_image="@drawable/ic_home"
-        app:mtf_openKeyboardOnFocus="true">
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:clickable="false"
-            android:hint="Password"
-            android:password="true"
-            android:enabled="false"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
 
-    </com.example.trungtien.raspberrypi.splash.raspberry_text.TextField>
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/tvLogout"
+    android:id="@+id/tvLogout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:text="Login failed..."
+    android:textColor="@color/white"
+    android:textSize="20sp"
+        android:layout_marginTop="20dp"
+    android:textStyle="italic" />
+    <TextView
+        android:id="@+id/tvSuccess"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="Login failed, Logout"
-        android:textColor="@color/red"
+        android:layout_marginTop="20dp"
+        android:text="successfully"
+        android:textColor="@color/white"
         android:textSize="20sp"
+
         android:textStyle="italic" />
 </FrameLayout>

@@ -2,30 +2,34 @@ package com.example.trungtien.raspberrypi.homescreen;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
-import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.trungtien.raspberrypi.MainActivity;
 import com.example.trungtien.raspberrypi.R;
 import com.example.trungtien.raspberrypi.homescreen.fragment.HomeFragment;
 import com.example.trungtien.raspberrypi.homescreen.fragment.IntroduceFragment;
 import com.example.trungtien.raspberrypi.homescreen.fragment.SettingFragment;
+import com.example.trungtien.raspberrypi.login.LoginActivity;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.special.ResideMenu.ResideMenu;
+import com.special.ResideMenu.ResideMenuItem;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
-    private DrawerLayout drawerLayout;
     private FragmentManager fragmentManager;
     private View btnMenu;
+    private ResideMenu resideMenu;
+    private Context mContext;
+    private ResideMenuItem itemHome;
+    private ResideMenuItem itemAbout;
+    private ResideMenuItem itemLogout;
+    private ResideMenuItem itemExit;
+    private ResideMenuItem itemSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +39,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         String mgs = FirebaseInstanceId.getInstance().getToken();
         Toast.makeText(this, mgs, Toast.LENGTH_SHORT).show();
         fragmentManager = getFragmentManager();
-        redirectFragment(new HomeFragment());
-        initNavigationDrawer();
+
+        mContext = this;
+        setUpMenu();
+        if (savedInstanceState == null)
+            redirectFragment(new HomeFragment());
         setupView();
     }
 
     private void setupView() {
-        btnMenu = findViewById(R.id.btn_menu);
-        btnMenu.setOnClickListener(this);
+
     }
 
     private void redirectFragment(Fragment fragment) {
@@ -52,66 +58,85 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 .commit();
     }
 
-    public void initNavigationDrawer() {
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+    private void setUpMenu() {
 
+        // attach to current activity;
+        resideMenu = new ResideMenu(this);
+
+        resideMenu.setBackground(R.drawable.background);
+        resideMenu.attachToActivity(this);
+        resideMenu.setMenuListener(menuListener);
+        //valid scale factor is between 0.0f and 1.0f. leftmenu'width is 150dip.
+        resideMenu.setScaleValue(0.7f);
+
+        // create menu items;
+        itemHome = new ResideMenuItem(this, R.drawable.icon_home, "Home");
+        itemAbout = new ResideMenuItem(this, R.drawable.ic_about, "About");
+        itemLogout = new ResideMenuItem(this, R.drawable.ic_logout, "Logout");
+        itemExit = new ResideMenuItem(this, R.drawable.ic_exit, "Exit");
+        itemSettings = new ResideMenuItem(this, R.drawable.icon_settings, "Settings");
+
+        itemHome.setOnClickListener(this);
+        itemAbout.setOnClickListener(this);
+        itemLogout.setOnClickListener(this);
+        itemExit.setOnClickListener(this);
+        itemSettings.setOnClickListener(this);
+
+        resideMenu.addMenuItem(itemHome, ResideMenu.DIRECTION_LEFT);
+        resideMenu.addMenuItem(itemAbout, ResideMenu.DIRECTION_LEFT);
+        resideMenu.addMenuItem(itemSettings, ResideMenu.DIRECTION_LEFT);
+        resideMenu.addMenuItem(itemLogout, ResideMenu.DIRECTION_LEFT);
+        resideMenu.addMenuItem(itemExit, ResideMenu.DIRECTION_LEFT);
+
+
+        // You can disable a direction by setting ->
+        resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
+
+        findViewById(R.id.title_bar_left_menu).setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-
-                int id = menuItem.getItemId();
-
-                switch (id) {
-                    case R.id.home:
-                        redirectFragment(new HomeFragment());
-                        drawerLayout.closeDrawers();
-                        break;
-                    case R.id.settings:
-                        redirectFragment(new SettingFragment());
-                        drawerLayout.closeDrawers();
-                        break;
-                    case R.id.about:
-                        redirectFragment(new IntroduceFragment());
-                        drawerLayout.closeDrawers();
-                        break;
-                    case R.id.logout:
-                        Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        drawerLayout.closeDrawers();
-                        finish();
-                        break;
-
-                }
-                return true;
+            public void onClick(View view) {
+                resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
             }
         });
-        View header = navigationView.getHeaderView(0);
-        TextView tv_email = (TextView) header.findViewById(R.id.tv_email);
-        tv_email.setText("tientt.dev@gmail.com");
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close) {
+    }
 
-            @Override
-            public void onDrawerClosed(View v) {
-                super.onDrawerClosed(v);
-            }
-
-            @Override
-            public void onDrawerOpened(View v) {
-                super.onDrawerOpened(v);
-            }
-        };
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return resideMenu.dispatchTouchEvent(ev);
     }
 
     @Override
     public void onClick(View view) {
-        if (view == btnMenu) {
-            drawerLayout.openDrawer(Gravity.START);
+
+        if (view == itemHome) {
+            redirectFragment(new HomeFragment());
+        } else if (view == itemAbout) {
+            redirectFragment(new IntroduceFragment());
+        } else if (view == itemExit) {
+            finish();
+        } else if (view == itemSettings) {
+            redirectFragment(new SettingFragment());
+        } else if (view == itemLogout) {
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
+
+        resideMenu.closeMenu();
     }
+
+    private ResideMenu.OnMenuListener menuListener = new ResideMenu.OnMenuListener() {
+        @Override
+        public void openMenu() {
+        }
+
+        @Override
+        public void closeMenu() {
+
+        }
+    };
+
 }
 

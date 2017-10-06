@@ -30,9 +30,10 @@ dependencies {
     //noinspection GradleCompatible
     compile 'com.google.firebase:firebase-messaging:11.0.0'
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
+    //noinspection GradleCompatible
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:23.2.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.specyci:residemenu:1.6+'
 }
 apply plugin: 'com.google.gms.google-services'

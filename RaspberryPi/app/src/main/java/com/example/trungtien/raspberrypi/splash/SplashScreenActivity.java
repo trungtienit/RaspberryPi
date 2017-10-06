@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.trungtien.raspberrypi.R;
 import com.example.trungtien.raspberrypi.cache.StoreManager;
@@ -19,7 +18,7 @@ import com.example.trungtien.raspberrypi.login.LoginActivity;
 public class SplashScreenActivity extends AppCompatActivity {
     private ObjectAnimator animation;
     private ProgressBar progressBar;
-    private TextView tvLogout;
+    private TextView tvLogout,tvSuccess;
     String pass;
 
     @Override
@@ -27,12 +26,12 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         pass = getIntent().getStringExtra(LoginActivity.LOGIN);
-
-        Toast.makeText(this, "start", Toast.LENGTH_SHORT).show();
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         tvLogout = (TextView) findViewById(R.id.tvLogout);
+        tvSuccess = (TextView) findViewById(R.id.tvSuccess);
         startProgress();
         tvLogout.setVisibility(View.GONE);
+        tvSuccess.setVisibility(View.GONE);
     }
 
     private void startProgress() {
@@ -63,6 +62,12 @@ public class SplashScreenActivity extends AppCompatActivity {
         smoothProgress(100, 200, new Runnable() {
             @Override
             public void run() {
+                tvSuccess.setVisibility(View.VISIBLE);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Intent intent = new Intent(SplashScreenActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
