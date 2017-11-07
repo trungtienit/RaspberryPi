@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.trungtien.raspberrypi.CheckPermission;
 import com.example.trungtien.raspberrypi.R;
 import com.example.trungtien.raspberrypi.homescreen.fragment.HomeFragment;
 import com.example.trungtien.raspberrypi.homescreen.fragment.IntroduceFragment;
@@ -39,7 +40,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         String mgs = FirebaseInstanceId.getInstance().getToken();
         Toast.makeText(this, mgs, Toast.LENGTH_SHORT).show();
         fragmentManager = getFragmentManager();
-
+        CheckPermission.checkAndRequestPermissions(this);
         mContext = this;
         setUpMenu();
         if (savedInstanceState == null)
